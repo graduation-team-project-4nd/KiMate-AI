@@ -26,6 +26,13 @@ AI Server for KiMate-AI
    export SCREEN_CHANGE_THRESHOLD=0.6    # 선택 사항
    export AI_SERVER_MOCK=0               # 1이면 OpenAI 호출 없이 더미 응답
    ```
+   또는 `.env` 파일을 사용하면 편리합니다:
+   ```
+   OPENAI_API_KEY=sk-...
+   OPENAI_MODEL=gpt-5.1
+   SCREEN_CHANGE_THRESHOLD=0.6
+   AI_SERVER_MOCK=1
+   ```
 
 3. 서버 실행
    ```bash
