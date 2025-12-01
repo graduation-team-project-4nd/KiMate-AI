@@ -150,6 +150,11 @@ def run_final_demo(client: TestClient) -> None:
             "user_inputs": ["에그 불고기 버거 주문해 줘"],
         },
         {
+            "name": "화면1-식사장소",
+            "texts": ["식사 장소를 선택해주세요", "매장", "포장"],
+            "user_inputs": ["매장"],
+        },
+        {
             "name": "화면2-메인카테고리",
             "texts": [
                 "홈",
