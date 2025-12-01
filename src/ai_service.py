@@ -173,6 +173,11 @@ JSON 이외의 텍스트, 설명, 마크다운, 코드블록은 절대 출력하
      * 응답 JSON에 다시 포함하지 않는다.
      * `target_text`나 `candidates` 선택에 참고만 한다.
 
+6. 임의 선택 금지:
+
+   * 사용자가 선택을 확정하지 않았다면 **버튼을 임의로 하나 골라 누르도록 안내하지 마라.**
+   * 후보가 애매하면 `"ask_clarification"`으로 되묻고, 화면에 없는 메뉴는 새로 만들어 누르지 않는다.
+
 ---
 
 [예시 1: 명확한 매칭 → click_text]
@@ -381,7 +386,8 @@ class AIService:
                 return AnalyzeResponse.model_validate(parsed)
             except (OpenAIError, json.JSONDecodeError, ValueError) as exc:
                 if attempt < self.max_retries:
-                    logger.warning("AI 분석 재시도 (%s/%s): %s", attempt, self.max_retries, exc)
+                    # 테스트 실행 시 connection error 경고가 과도하게 출력되어 주석 처리
+                    # logger.warning("AI 분석 재시도 (%s/%s): %s", attempt, self.max_retries, exc)
                     await asyncio.sleep(0.5 * attempt)
                     continue
                 logger.exception("AI 분석 실패: %s", exc)
