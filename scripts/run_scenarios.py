@@ -3,13 +3,27 @@ from __future__ import annotations
 import os
 from typing import Dict, List, Optional
 
+from pathlib import Path
+import sys
+
 from fastapi.testclient import TestClient
+
+# Ensure project root is on sys.path so `src` imports work when running the script directly.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 
 def build_client() -> TestClient:
-    # Use mock by default so the script can run without a real OpenAI key.
+    # Load .env first so explicit settings win.
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except Exception:
+        pass
+    # Use mock by default ONLY if not explicitly set; respects .env/real env.
     os.environ.setdefault("AI_SERVER_MOCK", "1")
-    os.environ.setdefault("OPENAI_MODEL", "gpt-4.1")
+    os.environ.setdefault("OPENAI_MODEL", "gpt-5.1")
     # Import after setting env so AI service picks up the mock flag.
     from src.main import app
 

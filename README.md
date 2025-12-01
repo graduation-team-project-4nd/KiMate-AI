@@ -5,7 +5,7 @@ AI Server for KiMate-AI
 
 요구사항 요약
 -------------
-- 모델: OpenAI Chat API (`OPENAI_MODEL`, 기본값 `gpt-4.1`).
+- 모델: OpenAI Chat API (`OPENAI_MODEL`, 기본값 `gpt-5.1`).
 - `/api/analyze`: 사용자 발화 + 화면 OCR 텍스트를 기반으로 액션 추천.
 - `/api/screen/detect`: 이전/현재 OCR 비교로 화면 전환 감지. 전환 시 내부적으로 AI 분석을 수행해 `ai_analysis` 포함.
 - 액션 타입: `click_text`, `speak_only`, `ask_clarification`.
@@ -22,7 +22,7 @@ AI Server for KiMate-AI
 2. 환경 변수
    ```bash
    export OPENAI_API_KEY=sk-...
-   export OPENAI_MODEL=gpt-4.1           # 선택 사항
+   export OPENAI_MODEL=gpt-5.1           # 선택 사항
    export SCREEN_CHANGE_THRESHOLD=0.6    # 선택 사항
    export AI_SERVER_MOCK=0               # 1이면 OpenAI 호출 없이 더미 응답
    ```

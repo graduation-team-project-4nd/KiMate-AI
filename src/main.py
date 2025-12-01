@@ -4,12 +4,16 @@ import logging
 import os
 from typing import Optional
 
+from dotenv import load_dotenv
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .ai_service import AIService
 from .models import AnalyzeRequest, AnalyzeResponse, ScreenDetectRequest, ScreenDetectResponse
 from .screen_detect import ScreenDetector
+
+load_dotenv()  # Load variables from .env if present
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -26,7 +30,7 @@ app.add_middleware(
 
 
 def _init_ai_service() -> AIService:
-    model = os.getenv("OPENAI_MODEL", "gpt-4.1")
+    model = os.getenv("OPENAI_MODEL", "gpt-5.1")
     mock = os.getenv("AI_SERVER_MOCK", "0") == "1"
     logger.info("AI service init - model=%s mock=%s", model, mock)
     return AIService(model=model, mock=mock)
