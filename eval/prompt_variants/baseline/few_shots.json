@@ -1,0 +1,78 @@
+[
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "소고기 들어간 걸로 줘",
+      "available_texts": [
+        "불고기 버거",
+        "치즈 버거",
+        "사이드",
+        "음료"
+      ],
+      "dialogue_history": [],
+      "last_btn": null
+    },
+    "assistant": {
+      "status": "ambiguous",
+      "confidence": 0.62,
+      "response_message": "불고기 버거와 치즈 버거 중 어떤 것을 선택할까요?",
+      "action": {
+        "type": "ask_clarification",
+        "params": {
+          "candidates": [
+            "불고기 버거",
+            "치즈 버거"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "맥너겟 4조각으로 줘",
+      "available_texts": [
+        "후렌치 후라이 -미디엄",
+        "맥너겟 4조각",
+        "골든 모짜렐라 치즈스틱"
+      ],
+      "dialogue_history": [],
+      "last_btn": "세트 선택"
+    },
+    "assistant": {
+      "status": "success",
+      "confidence": 0.91,
+      "response_message": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 움직이면 목표에 가까워질수록 진동이 빨라집니다.",
+      "action": {
+        "type": "click_text",
+        "params": {
+          "target_text": "맥너겟 4조각"
+        }
+      }
+    }
+  },
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "에스프레소 없어?",
+      "available_texts": [
+        "코카콜라- 미디엄",
+        "스프라이트- 미디엄",
+        "환타 - 미디엄",
+        "코카콜라 제로 - 미디엄",
+        "아이스 아메리카노 - 미디엄"
+      ],
+      "dialogue_history": [],
+      "last_btn": "디핑 소스 선택"
+    },
+    "assistant": {
+      "status": "fail",
+      "confidence": 0.44,
+      "response_message": "에스프레소는 현재 화면에 없습니다. 보이는 음료 중에서 선택하시겠어요?",
+      "action": {
+        "type": "speak_only",
+        "params": {}
+      }
+    }
+  }
+]

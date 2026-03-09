@@ -1,0 +1,86 @@
+{
+  "suite_id": "post_add_to_cart_navigation",
+  "description": "Generalization checks for post-add-to-cart navigation screens.",
+  "scenarios": [
+    {
+      "scenario_id": "open_order_history_after_add_to_cart",
+      "name": "Prefer order history over repeating a product card",
+      "session_id": "eval_post_cart_001",
+      "initial_dialogue_history": [
+        {
+          "role": "user",
+          "utterance": "새우 랩 세트 주문해 줘"
+        },
+        {
+          "role": "assistant",
+          "utterance": "장바구니 추가 버튼으로 안내하겠습니다.",
+          "action": {
+            "type": "click_text",
+            "params": {
+              "target_text": "장바구니 추가"
+            }
+          }
+        }
+      ],
+      "initial_last_btn": "장바구니 추가",
+      "steps": [
+        {
+          "step_id": "post_cart_order_history",
+          "name": "Click order history when it appears on a category-like screen",
+          "severity": "critical",
+          "input": {
+            "user_input": null,
+            "ocr_texts": ["홈", "전체", "랩", "샐러드", "사이드", "새우 랩", "치즈 랩", "4900원", "5400원", "주문내역", "6900원"]
+          },
+          "expected": {
+            "status": "success",
+            "action_type": "click_text",
+            "target_text": "주문내역",
+            "message_should_contain": ["주문내역"]
+          },
+          "rationale": "장바구니 추가 직후에는 새 상품 카드보다 주문내역 진입이 우선이다."
+        }
+      ]
+    },
+    {
+      "scenario_id": "open_cart_after_add_to_cart",
+      "name": "Prefer cart entry over menu tiles after add-to-cart",
+      "session_id": "eval_post_cart_002",
+      "initial_dialogue_history": [
+        {
+          "role": "user",
+          "utterance": "치킨 샌드위치 주문해 줘"
+        },
+        {
+          "role": "assistant",
+          "utterance": "장바구니 추가 버튼으로 안내하겠습니다.",
+          "action": {
+            "type": "click_text",
+            "params": {
+              "target_text": "장바구니 추가"
+            }
+          }
+        }
+      ],
+      "initial_last_btn": "장바구니 추가",
+      "steps": [
+        {
+          "step_id": "post_cart_cart_entry",
+          "name": "Click a cart entry button when it is visible after add-to-cart",
+          "severity": "critical",
+          "input": {
+            "user_input": null,
+            "ocr_texts": ["홈", "샌드위치", "사이드", "음료", "치킨 샌드위치", "클럽 샌드위치", "장바구니", "7600원"]
+          },
+          "expected": {
+            "status": "success",
+            "action_type": "click_text",
+            "target_text": "장바구니",
+            "message_should_contain": ["장바구니"]
+          },
+          "rationale": "주문 검토/결제 흐름에서는 상품 카드보다 장바구니 진입 버튼이 우선이다."
+        }
+      ]
+    }
+  ]
+}

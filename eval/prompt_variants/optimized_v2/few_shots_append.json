@@ -1,0 +1,41 @@
+[
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "",
+      "available_texts": [
+        "홈",
+        "버거",
+        "사이드",
+        "음료",
+        "에그 불고기 버거",
+        "주문내역",
+        "5400원"
+      ],
+      "dialogue_history": [
+        {
+          "role": "assistant",
+          "utterance": "장바구니 추가 버튼으로 안내하겠습니다.",
+          "action": {
+            "type": "click_text",
+            "params": {
+              "target_text": "장바구니 추가"
+            }
+          }
+        }
+      ],
+      "last_btn": "장바구니 추가"
+    },
+    "assistant": {
+      "status": "success",
+      "confidence": 0.95,
+      "response_message": "주문을 확인하려면 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요.",
+      "action": {
+        "type": "click_text",
+        "params": {
+          "target_text": "주문내역"
+        }
+      }
+    }
+  }
+]

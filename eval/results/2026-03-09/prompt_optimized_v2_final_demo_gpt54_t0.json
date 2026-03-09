@@ -1,0 +1,5468 @@
+{
+  "created_at": "2026-03-09T13:39:36.532117+00:00",
+  "runner_type": "prompt_runner",
+  "prompt_profile": "optimized_v2",
+  "prompt_files": [
+    "eval/prompt_variants/baseline/system.txt",
+    "eval/prompt_variants/baseline/few_shots.json",
+    "eval/prompt_variants/optimized_v1/profile.json",
+    "eval/prompt_variants/optimized_v1/system_append.txt",
+    "eval/prompt_variants/optimized_v1/few_shots_append.json",
+    "eval/prompt_variants/optimized_v2/profile.json",
+    "eval/prompt_variants/optimized_v2/system_append.txt",
+    "eval/prompt_variants/optimized_v2/few_shots_append.json"
+  ],
+  "model_label": "optimized_v2__gpt-5.4",
+  "env": {
+    "OPENAI_MODEL": "gpt-5.4",
+    "AI_SERVER_MOCK": "0"
+  },
+  "summary": {
+    "total_steps": 23,
+    "passed_steps": 22,
+    "failed_steps": 1,
+    "critical_failures": 0,
+    "average_score": 98.9
+  },
+  "suites": [
+    {
+      "suite_id": "final_demo",
+      "description": "End-to-end evaluation suite based on scripts/run_scenarios.py with explicit expected behaviors.",
+      "case_file": "eval/cases/final_demo.json",
+      "summary": {
+        "total_steps": 23,
+        "passed_steps": 22,
+        "failed_steps": 1,
+        "critical_failures": 0,
+        "average_score": 98.9
+      },
+      "scenarios": [
+        {
+          "scenario_id": "final_demo_end_to_end",
+          "name": "Final demo end-to-end",
+          "session_id": "sess_final_eval",
+          "summary": {
+            "total_steps": 23,
+            "passed_steps": 22,
+            "failed_steps": 1,
+            "critical_failures": 0,
+            "average_score": 98.9
+          },
+          "steps": [
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 1,
+              "step_id": "screen1_request_menu",
+              "name": "화면1-식사장소 / 메뉴 요청",
+              "severity": "critical",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "에그 불고기 버거 주문해 줘",
+                "ocr_texts": [
+                  "식사 장소를 선택해주세요",
+                  "매장",
+                  "포장"
+                ],
+                "dialogue_history": [],
+                "last_btn": null
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.98,
+                "response_message": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "매장",
+                      "포장"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "매장",
+                    "포장"
+                  ],
+                  "actual": [
+                    "매장",
+                    "포장"
+                  ]
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "매장",
+                    "포장"
+                  ],
+                  "actual": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?"
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "매장",
+                  "포장"
+                ],
+                "message_should_contain": [
+                  "매장",
+                  "포장"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "주문을 진행하기 전에 식사 장소 선택이 먼저 필요하다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 2,
+              "step_id": "screen1_choose_store",
+              "name": "화면1-식사장소 / 매장 선택",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "매장",
+                "ocr_texts": [
+                  "식사 장소를 선택해주세요",
+                  "매장",
+                  "포장"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": null
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.99,
+                "response_message": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "매장"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "매장",
+                  "actual": "매장"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "매장"
+                  ],
+                  "actual": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "매장",
+                "message_should_contain": [
+                  "매장"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사용자가 식사 장소를 확정했으므로 매장 버튼을 클릭해야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 3,
+              "step_id": "screen2_go_to_burger_category",
+              "name": "화면2-메인카테고리 / 버거 카테고리 이동",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "홈",
+                  "메뉴 알아보기",
+                  "추천 메뉴",
+                  "추천메뉴",
+                  "버거&세트",
+                  "버거",
+                  "이달의",
+                  "커피&디저트",
+                  "해피스낵",
+                  "사이드",
+                  "커피",
+                  "상콤달콤함이 하늘을 찔러!",
+                  "디저트",
+                  "음료",
+                  "지금 가장 가까운 맥카페!",
+                  "해피빈"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "매장"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.93,
+                "response_message": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "버거"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "버거",
+                  "actual": "버거"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "버거"
+                  ],
+                  "actual": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "버거",
+                "message_should_contain": [
+                  "버거"
+                ]
+              },
+              "matched_alternative": 2,
+              "rationale": "목표 메뉴를 찾기 위해 먼저 버거 관련 카테고리로 이동해야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 4,
+              "step_id": "screen3_scroll_down",
+              "name": "화면3-버거리스트1 / 아래로 스크롤",
+              "severity": "critical",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "홈",
+                  "전체",
+                  "치킨",
+                  "씨푸드",
+                  "불고기",
+                  "추천 메뉴",
+                  "버거",
+                  "더블 빅맥",
+                  "트리플 치즈 버거",
+                  "7000원, 675kcal",
+                  "5600원, 619kcal",
+                  "해피스낵",
+                  "사이드",
+                  "커피",
+                  "빅맥",
+                  "더블 불고기 버거",
+                  "4600원, 583kcal",
+                  "4400원, 636kcal",
+                  "디저트",
+                  "음료",
+                  "해피빈"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "버거"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.87,
+                "response_message": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                "action": {
+                  "type": "speak_only",
+                  "params": {}
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": [
+                    "success",
+                    "fail"
+                  ],
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "speak_only",
+                  "actual": "speak_only"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "아래",
+                    "스크롤"
+                  ],
+                  "actual": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요."
+                },
+                {
+                  "name": "message_should_not_contain",
+                  "passed": true,
+                  "expected": [
+                    "불고기 버튼",
+                    "불고기 버튼으로"
+                  ],
+                  "actual": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": [
+                  "success",
+                  "fail"
+                ],
+                "action_type": "speak_only",
+                "message_should_contain": [
+                  "아래",
+                  "스크롤"
+                ],
+                "message_should_not_contain": [
+                  "불고기 버튼",
+                  "불고기 버튼으로"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "에그 불고기 버거가 아직 보이지 않으므로 불고기 필터 클릭보다 스크롤 유도가 우선이다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 5,
+              "step_id": "screen4_pick_egg_bulgogi",
+              "name": "화면4-버거리스트2 / 에그 불고기 버거 선택",
+              "severity": "critical",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "홈",
+                  "전체",
+                  "치킨",
+                  "씨푸드",
+                  "불고기",
+                  "추천 메뉴",
+                  "버거",
+                  "맥스파이시 상하이 버거",
+                  "에그 불고기 버거",
+                  "8000원, 897kcal",
+                  "4400원, 630kcal",
+                  "해피스낵",
+                  "사이드",
+                  "커피",
+                  "맥치킨",
+                  "맥치킨 모짜렐라",
+                  "5200원, 621kcal",
+                  "6600원, 789kcal",
+                  "디저트",
+                  "음료",
+                  "해피빈"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  }
+                ],
+                "last_btn": "버거"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.99,
+                "response_message": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "에그 불고기 버거"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "에그 불고기 버거",
+                  "actual": "에그 불고기 버거"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "에그 불고기 버거"
+                  ],
+                  "actual": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "에그 불고기 버거",
+                "message_should_contain": [
+                  "에그 불고기 버거"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "목표 메뉴가 보이면 정확한 메뉴 버튼을 클릭해야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 6,
+              "step_id": "screen5_ask_set_or_single",
+              "name": "화면5-세트여부 / 되묻기",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "세트로 주문하시겠습니까?",
+                  "세트 선택",
+                  "단품 선택",
+                  "취소",
+                  "4400원, 630kcal"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "에그 불고기 버거"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.98,
+                "response_message": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "세트 선택",
+                      "단품 선택"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "세트 선택",
+                    "단품 선택"
+                  ],
+                  "actual": [
+                    "세트 선택",
+                    "단품 선택"
+                  ]
+                },
+                {
+                  "name": "message_should_contain_any",
+                  "passed": true,
+                  "expected": [
+                    "세트",
+                    "단품"
+                  ],
+                  "actual": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?"
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "세트 선택",
+                  "단품 선택"
+                ],
+                "message_should_contain_any": [
+                  "세트",
+                  "단품"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "세트 여부는 사용자가 확정해야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 7,
+              "step_id": "screen5_choose_set",
+              "name": "화면5-세트여부 / 세트 선택",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "세트",
+                "ocr_texts": [
+                  "세트로 주문하시겠습니까?",
+                  "세트 선택",
+                  "단품 선택",
+                  "취소",
+                  "4400원, 630kcal"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "에그 불고기 버거"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.99,
+                "response_message": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "세트 선택"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "세트 선택",
+                  "actual": "세트 선택"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "세트 선택"
+                  ],
+                  "actual": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "세트 선택",
+                "message_should_contain": [
+                  "세트 선택"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사용자가 세트를 선택했으므로 세트 선택 버튼을 눌러야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 8,
+              "step_id": "screen6_ask_set_size",
+              "name": "화면6-세트선택 / 기본 세트 vs 라지세트",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "주문 확인하기",
+                  "에그 불고기 버거 - 세트",
+                  "에그 불고기 버거 - 라지세트",
+                  "5400원, 890kcal",
+                  "6400원, 940kcal"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "세트 선택"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.93,
+                "response_message": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "에그 불고기 버거 - 세트",
+                      "에그 불고기 버거 - 라지세트"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "에그 불고기 버거 - 세트",
+                    "에그 불고기 버거 - 라지세트"
+                  ],
+                  "actual": [
+                    "에그 불고기 버거 - 세트",
+                    "에그 불고기 버거 - 라지세트"
+                  ]
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "에그 불고기 버거 - 세트",
+                  "에그 불고기 버거 - 라지세트"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "기본 세트와 라지세트 중 어느 것을 원하는지 확인해야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 9,
+              "step_id": "screen6_choose_regular_set",
+              "name": "화면6-세트선택 / 그냥 세트 선택",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "그냥 세트",
+                "ocr_texts": [
+                  "주문 확인하기",
+                  "에그 불고기 버거 - 세트",
+                  "에그 불고기 버거 - 라지세트",
+                  "5400원, 890kcal",
+                  "6400원, 940kcal"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "세트 선택"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.98,
+                "response_message": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "에그 불고기 버거 - 세트"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "에그 불고기 버거 - 세트",
+                  "actual": "에그 불고기 버거 - 세트"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "에그 불고기 버거 - 세트"
+                  ],
+                  "actual": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "에그 불고기 버거 - 세트",
+                "message_should_contain": [
+                  "에그 불고기 버거 - 세트"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사용자가 라지가 아닌 기본 세트를 요청했다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 10,
+              "step_id": "screen7_ask_side",
+              "name": "화면7-사이드선택 / 되묻기",
+              "severity": "critical",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "세트메뉴 사이드를 선택하세요",
+                  "후렌치 후라이 -미디엄",
+                  "맥너겟 4조각",
+                  "골든 모짜렐라 치즈스틱",
+                  "332kcal",
+                  "171kcal",
+                  "159kcal"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "에그 불고기 버거 - 세트"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.98,
+                "response_message": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "후렌치 후라이 -미디엄",
+                      "맥너겟 4조각",
+                      "골든 모짜렐라 치즈스틱"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "후렌치 후라이 -미디엄",
+                    "맥너겟 4조각",
+                    "골든 모짜렐라 치즈스틱"
+                  ],
+                  "actual": [
+                    "후렌치 후라이 -미디엄",
+                    "맥너겟 4조각",
+                    "골든 모짜렐라 치즈스틱"
+                  ]
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "후렌치 후라이 -미디엄",
+                  "맥너겟 4조각",
+                  "골든 모짜렐라 치즈스틱"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사이드 메뉴도 사용자 확인이 필요하다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 11,
+              "step_id": "screen7_choose_nuggets",
+              "name": "화면7-사이드선택 / 맥너겟 4조각 선택",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "맥너겟 4조각으로 줘",
+                "ocr_texts": [
+                  "세트메뉴 사이드를 선택하세요",
+                  "후렌치 후라이 -미디엄",
+                  "맥너겟 4조각",
+                  "골든 모짜렐라 치즈스틱",
+                  "332kcal",
+                  "171kcal",
+                  "159kcal"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "에그 불고기 버거 - 세트"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.99,
+                "response_message": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "맥너겟 4조각"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "맥너겟 4조각",
+                  "actual": "맥너겟 4조각"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "맥너겟 4조각"
+                  ],
+                  "actual": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "맥너겟 4조각",
+                "message_should_contain": [
+                  "맥너겟 4조각"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사용자가 사이드를 명확히 선택했다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 12,
+              "step_id": "screen8_ask_sauce",
+              "name": "화면8-소스선택 / 되묻기",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "디핑 소스를 선택하세요",
+                  "랜덤 소스",
+                  "오렌지 칠리 소스",
+                  "케이준 소스",
+                  "스위트 칠리 소스",
+                  "소스 없음"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "맥너겟 4조각"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.97,
+                "response_message": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "랜덤 소스",
+                      "오렌지 칠리 소스",
+                      "케이준 소스",
+                      "스위트 칠리 소스",
+                      "소스 없음"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "랜덤 소스",
+                    "오렌지 칠리 소스",
+                    "케이준 소스",
+                    "스위트 칠리 소스",
+                    "소스 없음"
+                  ],
+                  "actual": [
+                    "랜덤 소스",
+                    "오렌지 칠리 소스",
+                    "케이준 소스",
+                    "스위트 칠리 소스",
+                    "소스 없음"
+                  ]
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "랜덤 소스",
+                  "오렌지 칠리 소스",
+                  "케이준 소스",
+                  "스위트 칠리 소스",
+                  "소스 없음"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "소스 종류도 사용자 선택이 필요하다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 13,
+              "step_id": "screen8_choose_orange_chili",
+              "name": "화면8-소스선택 / 오렌지 칠리 소스 선택",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "오렌지 칠리 소스 줘",
+                "ocr_texts": [
+                  "디핑 소스를 선택하세요",
+                  "랜덤 소스",
+                  "오렌지 칠리 소스",
+                  "케이준 소스",
+                  "스위트 칠리 소스",
+                  "소스 없음"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "맥너겟 4조각"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.99,
+                "response_message": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "오렌지 칠리 소스"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "오렌지 칠리 소스",
+                  "actual": "오렌지 칠리 소스"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "오렌지 칠리 소스"
+                  ],
+                  "actual": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "오렌지 칠리 소스",
+                "message_should_contain": [
+                  "오렌지 칠리 소스"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사용자가 특정 소스를 선택했다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 14,
+              "step_id": "screen9_ask_drink",
+              "name": "화면9-음료선택 / 되묻기",
+              "severity": "critical",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "세트메뉴 음료를 선택하세요",
+                  "코카콜라- 미디엄",
+                  "스프라이트- 미디엄",
+                  "환타 - 미디엄",
+                  "코카콜라 제로 - 미디엄",
+                  "아이스 아메리카노 - 미디엄",
+                  "아이스 카페 라떼 - 미디엄"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "오렌지 칠리 소스"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.98,
+                "response_message": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "코카콜라- 미디엄",
+                      "스프라이트- 미디엄",
+                      "환타 - 미디엄",
+                      "코카콜라 제로 - 미디엄",
+                      "아이스 아메리카노 - 미디엄",
+                      "아이스 카페 라떼 - 미디엄"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "코카콜라- 미디엄",
+                    "스프라이트- 미디엄",
+                    "환타 - 미디엄",
+                    "코카콜라 제로 - 미디엄",
+                    "아이스 아메리카노 - 미디엄",
+                    "아이스 카페 라떼 - 미디엄"
+                  ],
+                  "actual": [
+                    "코카콜라- 미디엄",
+                    "스프라이트- 미디엄",
+                    "환타 - 미디엄",
+                    "코카콜라 제로 - 미디엄",
+                    "아이스 아메리카노 - 미디엄",
+                    "아이스 카페 라떼 - 미디엄"
+                  ]
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "코카콜라- 미디엄",
+                  "스프라이트- 미디엄",
+                  "환타 - 미디엄",
+                  "코카콜라 제로 - 미디엄",
+                  "아이스 아메리카노 - 미디엄",
+                  "아이스 카페 라떼 - 미디엄"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "음료도 사용자가 직접 확정해야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 15,
+              "step_id": "screen9_espresso_absent",
+              "name": "화면9-음료선택 / 에스프레소 없음 안내",
+              "severity": "critical",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "에스프레소 없어?",
+                "ocr_texts": [
+                  "세트메뉴 음료를 선택하세요",
+                  "코카콜라- 미디엄",
+                  "스프라이트- 미디엄",
+                  "환타 - 미디엄",
+                  "코카콜라 제로 - 미디엄",
+                  "아이스 아메리카노 - 미디엄",
+                  "아이스 카페 라떼 - 미디엄"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "오렌지 칠리 소스"
+              },
+              "response": {
+                "status": "fail",
+                "confidence": 0.9,
+                "response_message": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                "action": {
+                  "type": "speak_only",
+                  "params": {}
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "fail",
+                  "actual": "fail"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "speak_only",
+                  "actual": "speak_only"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "에스프레소"
+                  ],
+                  "actual": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요."
+                },
+                {
+                  "name": "message_should_contain_any",
+                  "passed": true,
+                  "expected": [
+                    "없",
+                    "다른"
+                  ],
+                  "actual": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "fail",
+                "action_type": "speak_only",
+                "message_should_contain": [
+                  "에스프레소"
+                ],
+                "message_should_contain_any": [
+                  "없",
+                  "다른"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "화면에 없는 메뉴를 물으면 다른 버튼을 대신 누르면 안 된다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 16,
+              "step_id": "screen9_choose_coke",
+              "name": "화면9-음료선택 / 코카콜라 선택",
+              "severity": "critical",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "그럼 코카콜라-미디엄으로 줘",
+                "ocr_texts": [
+                  "세트메뉴 음료를 선택하세요",
+                  "코카콜라- 미디엄",
+                  "스프라이트- 미디엄",
+                  "환타 - 미디엄",
+                  "코카콜라 제로 - 미디엄",
+                  "아이스 아메리카노 - 미디엄",
+                  "아이스 카페 라떼 - 미디엄"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  }
+                ],
+                "last_btn": "오렌지 칠리 소스"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.98,
+                "response_message": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "코카콜라- 미디엄"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "코카콜라- 미디엄",
+                  "actual": "코카콜라- 미디엄"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "코카콜라"
+                  ],
+                  "actual": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "코카콜라- 미디엄",
+                "message_should_contain": [
+                  "코카콜라"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "클릭 타깃은 OCR 원문 기준으로 정확해야 한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 17,
+              "step_id": "screen10_ask_summary_action",
+              "name": "화면10-요약 / 다음 동작 확인",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": false,
+              "score": 75,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "에그 불고기 버거 - 세트",
+                  "5400원, 890kcal",
+                  "에그 불고기 버거",
+                  "맥너겟 4조각 (기간 한정 교환 중)",
+                  "오렌지 칠리 소스",
+                  "코카-콜라 - 미디엄",
+                  "-",
+                  "1",
+                  "+",
+                  "재료추가/변경",
+                  "수정",
+                  "취소",
+                  "장바구니 추가"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그럼 코카콜라-미디엄으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "코카콜라- 미디엄"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "코카콜라- 미디엄"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.93,
+                "response_message": "현재 옵션 확인 화면입니다. 재료추가/변경, 수정, 취소, 장바구니 추가 중에서 원하시는 항목을 말씀해 주세요.",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "재료추가/변경",
+                      "수정",
+                      "취소",
+                      "장바구니 추가"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": false,
+                  "expected": [
+                    "수정",
+                    "취소",
+                    "장바구니 추가"
+                  ],
+                  "actual": [
+                    "재료추가/변경",
+                    "수정",
+                    "취소",
+                    "장바구니 추가"
+                  ]
+                }
+              ],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": false,
+                  "expected": [
+                    "수정",
+                    "취소",
+                    "장바구니 추가"
+                  ],
+                  "actual": [
+                    "재료추가/변경",
+                    "수정",
+                    "취소",
+                    "장바구니 추가"
+                  ]
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "수정",
+                  "취소",
+                  "장바구니 추가"
+                ]
+              },
+              "matched_alternative": 1,
+              "rationale": "변경 여부를 확인하는 되묻기와, 현재 주문 흐름을 이어 장바구니 추가로 바로 진행하는 해석을 모두 허용한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 18,
+              "step_id": "screen10_add_to_cart",
+              "name": "화면10-요약 / 변경 없음 -> 장바구니 추가",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "없어",
+                "ocr_texts": [
+                  "에그 불고기 버거 - 세트",
+                  "5400원, 890kcal",
+                  "에그 불고기 버거",
+                  "맥너겟 4조각 (기간 한정 교환 중)",
+                  "오렌지 칠리 소스",
+                  "코카-콜라 - 미디엄",
+                  "-",
+                  "1",
+                  "+",
+                  "재료추가/변경",
+                  "수정",
+                  "취소",
+                  "장바구니 추가"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그럼 코카콜라-미디엄으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "코카콜라- 미디엄"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 옵션 확인 화면입니다. 재료추가/변경, 수정, 취소, 장바구니 추가 중에서 원하시는 항목을 말씀해 주세요.",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "재료추가/변경",
+                          "수정",
+                          "취소",
+                          "장바구니 추가"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "코카콜라- 미디엄"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.99,
+                "response_message": "변경할 내용이 없으시면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강할 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "장바구니 추가"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "장바구니 추가",
+                  "actual": "장바구니 추가"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "장바구니 추가"
+                  ],
+                  "actual": "변경할 내용이 없으시면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강할 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "장바구니 추가",
+                "message_should_contain": [
+                  "장바구니 추가"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사용자가 변경 없음을 말했으므로 장바구니 추가로 진행한다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 19,
+              "step_id": "screen11_open_order_history",
+              "name": "화면11-카테고리로복귀 / 주문내역 열기",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "홈",
+                  "전체",
+                  "치킨",
+                  "씨푸드",
+                  "불고기",
+                  "추천 메뉴",
+                  "버거",
+                  "맥스파이시 상하이 버거",
+                  "에그 불고기 버거",
+                  "8000원, 897kcal",
+                  "4400원, 630kcal",
+                  "해피스낵",
+                  "사이드",
+                  "커피",
+                  "맥치킨",
+                  "맥치킨 모짜렐라",
+                  "5200원, 621kcal",
+                  "6600원, 789kcal",
+                  "디저트",
+                  "음료",
+                  "해피빈",
+                  "주문내역",
+                  "5400원"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그럼 코카콜라-미디엄으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "코카콜라- 미디엄"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 옵션 확인 화면입니다. 재료추가/변경, 수정, 취소, 장바구니 추가 중에서 원하시는 항목을 말씀해 주세요.",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "재료추가/변경",
+                          "수정",
+                          "취소",
+                          "장바구니 추가"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "없어"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "변경할 내용이 없으시면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강할 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "장바구니 추가"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "장바구니 추가"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.98,
+                "response_message": "방금 장바구니에 담으셨으므로 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "주문내역"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "주문내역",
+                  "actual": "주문내역"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "주문내역"
+                  ],
+                  "actual": "방금 장바구니에 담으셨으므로 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "주문내역",
+                "message_should_contain": [
+                  "주문내역"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "장바구니에 담긴 뒤에는 주문내역 진입이 자연스럽다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 20,
+              "step_id": "screen12_finish_or_confirm",
+              "name": "화면12-주문내역 / 주문 완료 또는 되묻기",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "취소",
+                  "에그 불고기 버거 - 세트",
+                  "-1+",
+                  "세부 정보 표시",
+                  "추가주문",
+                  "주문 완료"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그럼 코카콜라-미디엄으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "코카콜라- 미디엄"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 옵션 확인 화면입니다. 재료추가/변경, 수정, 취소, 장바구니 추가 중에서 원하시는 항목을 말씀해 주세요.",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "재료추가/변경",
+                          "수정",
+                          "취소",
+                          "장바구니 추가"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "없어"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "변경할 내용이 없으시면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강할 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "장바구니 추가"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "방금 장바구니에 담으셨으므로 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "주문내역"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "주문내역"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.93,
+                "response_message": "현재 주문 확인 화면입니다. 추가주문과 주문 완료 중에서 어떤 것을 선택하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "추가주문",
+                      "주문 완료"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "추가주문",
+                    "주문 완료"
+                  ],
+                  "actual": [
+                    "추가주문",
+                    "주문 완료"
+                  ]
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "추가주문",
+                  "주문 완료"
+                ]
+              },
+              "matched_alternative": 2,
+              "rationale": "이 단계는 자동 진행과 안전한 되묻기 둘 다 허용 가능한 해석으로 본다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 21,
+              "step_id": "screen13_ask_payment_method",
+              "name": "화면13-결제선택 / 결제 방법 질문",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "결제 방법을 선택해주세요",
+                  "카드결제",
+                  "모바일 상품권"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그럼 코카콜라-미디엄으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "코카콜라- 미디엄"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 옵션 확인 화면입니다. 재료추가/변경, 수정, 취소, 장바구니 추가 중에서 원하시는 항목을 말씀해 주세요.",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "재료추가/변경",
+                          "수정",
+                          "취소",
+                          "장바구니 추가"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "없어"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "변경할 내용이 없으시면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강할 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "장바구니 추가"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "방금 장바구니에 담으셨으므로 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "주문내역"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 주문 확인 화면입니다. 추가주문과 주문 완료 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "추가주문",
+                          "주문 완료"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "주문내역"
+              },
+              "response": {
+                "status": "ambiguous",
+                "confidence": 0.98,
+                "response_message": "결제 방법을 선택하셔야 합니다. 카드결제와 모바일 상품권 중 어떤 방법으로 하시겠습니까?",
+                "action": {
+                  "type": "ask_clarification",
+                  "params": {
+                    "candidates": [
+                      "카드결제",
+                      "모바일 상품권"
+                    ]
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "ambiguous",
+                  "actual": "ambiguous"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "ask_clarification",
+                  "actual": "ask_clarification"
+                },
+                {
+                  "name": "candidates_exact_unordered",
+                  "passed": true,
+                  "expected": [
+                    "카드결제",
+                    "모바일 상품권"
+                  ],
+                  "actual": [
+                    "카드결제",
+                    "모바일 상품권"
+                  ]
+                }
+              ],
+              "matched_expectation": {
+                "status": "ambiguous",
+                "action_type": "ask_clarification",
+                "candidates_exact_unordered": [
+                  "카드결제",
+                  "모바일 상품권"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "결제 수단은 사용자 의사 확인이 필요하다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 22,
+              "step_id": "screen13_choose_card",
+              "name": "화면13-결제선택 / 카드결제 선택",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": "카드 결제로",
+                "ocr_texts": [
+                  "결제 방법을 선택해주세요",
+                  "카드결제",
+                  "모바일 상품권"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그럼 코카콜라-미디엄으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "코카콜라- 미디엄"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 옵션 확인 화면입니다. 재료추가/변경, 수정, 취소, 장바구니 추가 중에서 원하시는 항목을 말씀해 주세요.",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "재료추가/변경",
+                          "수정",
+                          "취소",
+                          "장바구니 추가"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "없어"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "변경할 내용이 없으시면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강할 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "장바구니 추가"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "방금 장바구니에 담으셨으므로 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "주문내역"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 주문 확인 화면입니다. 추가주문과 주문 완료 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "추가주문",
+                          "주문 완료"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "결제 방법을 선택하셔야 합니다. 카드결제와 모바일 상품권 중 어떤 방법으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "카드결제",
+                          "모바일 상품권"
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "주문내역"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.99,
+                "response_message": "카드결제 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                "action": {
+                  "type": "click_text",
+                  "params": {
+                    "target_text": "카드결제"
+                  }
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": "success",
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "click_text",
+                  "actual": "click_text"
+                },
+                {
+                  "name": "target_text",
+                  "passed": true,
+                  "expected": "카드결제",
+                  "actual": "카드결제"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "카드결제"
+                  ],
+                  "actual": "카드결제 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": "success",
+                "action_type": "click_text",
+                "target_text": "카드결제",
+                "message_should_contain": [
+                  "카드결제"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "사용자가 카드 결제를 명확히 선택했다."
+            },
+            {
+              "suite_id": "final_demo",
+              "scenario_id": "final_demo_end_to_end",
+              "step_index": 23,
+              "step_id": "screen14_payment_guide",
+              "name": "화면14-결제안내 / speak_only 안내",
+              "severity": "normal",
+              "endpoint": "analyze",
+              "pass": true,
+              "score": 100,
+              "error": null,
+              "request": {
+                "session_id": "sess_final_eval",
+                "user_input": null,
+                "ocr_texts": [
+                  "결제를 진행해주세요",
+                  "IC 신용/체크카드 사용 시",
+                  "카드를 화살표 방향으로 투입구에 넣어주세요",
+                  "결제 오류 시, 카드를 긁어주세요"
+                ],
+                "dialogue_history": [
+                  {
+                    "role": "user",
+                    "utterance": "에그 불고기 버거 주문해 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "식사 장소를 먼저 선택하셔야 합니다. 매장과 포장 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "매장",
+                          "포장"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "매장"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "매장 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "매장"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거는 버거 메뉴에서 찾을 수 있습니다. 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라질 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤하시면서 메뉴를 찾아주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 단품 중 하나를 선택하셔야 합니다. 세트 선택 또는 단품 선택 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "세트 선택",
+                          "단품 선택"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트 선택 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "세트 선택"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트와 라지세트 중 하나를 선택하셔야 합니다. 에그 불고기 버거 - 세트와 에그 불고기 버거 - 라지세트 중 어떤 것으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "에그 불고기 버거 - 세트",
+                          "에그 불고기 버거 - 라지세트"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그냥 세트"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "에그 불고기 버거 - 세트 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "에그 불고기 버거 - 세트"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 사이드를 선택하셔야 합니다. 후렌치 후라이 -미디엄, 맥너겟 4조각, 골든 모짜렐라 치즈스틱 중에서 어떤 사이드를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "후렌치 후라이 -미디엄",
+                          "맥너겟 4조각",
+                          "골든 모짜렐라 치즈스틱"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "맥너겟 4조각으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "맥너겟 4조각 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "맥너겟 4조각"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "디핑 소스를 선택하셔야 합니다. 랜덤 소스, 오렌지 칠리 소스, 케이준 소스, 스위트 칠리 소스, 소스 없음 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "랜덤 소스",
+                          "오렌지 칠리 소스",
+                          "케이준 소스",
+                          "스위트 칠리 소스",
+                          "소스 없음"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "오렌지 칠리 소스 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "오렌지 칠리 소스"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "코카콜라- 미디엄",
+                          "스프라이트- 미디엄",
+                          "환타 - 미디엄",
+                          "코카콜라 제로 - 미디엄",
+                          "아이스 아메리카노 - 미디엄",
+                          "아이스 카페 라떼 - 미디엄"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "에스프레소 없어?"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 화면에는 에스프레소가 없습니다. 음료를 바꾸시려면 보이는 음료 중에서 다시 선택해 주세요.",
+                    "action": {
+                      "type": "speak_only",
+                      "params": {}
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "그럼 코카콜라-미디엄으로 줘"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "코카콜라- 미디엄 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "코카콜라- 미디엄"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 옵션 확인 화면입니다. 재료추가/변경, 수정, 취소, 장바구니 추가 중에서 원하시는 항목을 말씀해 주세요.",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "재료추가/변경",
+                          "수정",
+                          "취소",
+                          "장바구니 추가"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "없어"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "변경할 내용이 없으시면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강할 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "장바구니 추가"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "방금 장바구니에 담으셨으므로 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "주문내역"
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "현재 주문 확인 화면입니다. 추가주문과 주문 완료 중에서 어떤 것을 선택하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "추가주문",
+                          "주문 완료"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "결제 방법을 선택하셔야 합니다. 카드결제와 모바일 상품권 중 어떤 방법으로 하시겠습니까?",
+                    "action": {
+                      "type": "ask_clarification",
+                      "params": {
+                        "candidates": [
+                          "카드결제",
+                          "모바일 상품권"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "role": "user",
+                    "utterance": "카드 결제로"
+                  },
+                  {
+                    "role": "assistant",
+                    "utterance": "카드결제 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 빨라졌을 때 눌러주세요.",
+                    "action": {
+                      "type": "click_text",
+                      "params": {
+                        "target_text": "카드결제"
+                      }
+                    }
+                  }
+                ],
+                "last_btn": "카드결제"
+              },
+              "response": {
+                "status": "success",
+                "confidence": 0.98,
+                "response_message": "카드 결제 화면입니다. 카드를 화살표 방향으로 투입구에 넣어주세요. 오류가 나면 카드를 긁어주세요.",
+                "action": {
+                  "type": "speak_only",
+                  "params": {}
+                }
+              },
+              "failed_checks": [],
+              "checks": [
+                {
+                  "name": "analysis_present",
+                  "passed": true,
+                  "expected": true,
+                  "actual": true
+                },
+                {
+                  "name": "status",
+                  "passed": true,
+                  "expected": [
+                    "success",
+                    "fail"
+                  ],
+                  "actual": "success"
+                },
+                {
+                  "name": "action_type",
+                  "passed": true,
+                  "expected": "speak_only",
+                  "actual": "speak_only"
+                },
+                {
+                  "name": "message_should_contain",
+                  "passed": true,
+                  "expected": [
+                    "카드"
+                  ],
+                  "actual": "카드 결제 화면입니다. 카드를 화살표 방향으로 투입구에 넣어주세요. 오류가 나면 카드를 긁어주세요."
+                },
+                {
+                  "name": "message_should_contain_any",
+                  "passed": true,
+                  "expected": [
+                    "넣",
+                    "투입",
+                    "긁"
+                  ],
+                  "actual": "카드 결제 화면입니다. 카드를 화살표 방향으로 투입구에 넣어주세요. 오류가 나면 카드를 긁어주세요."
+                }
+              ],
+              "matched_expectation": {
+                "status": [
+                  "success",
+                  "fail"
+                ],
+                "action_type": "speak_only",
+                "message_should_contain": [
+                  "카드"
+                ],
+                "message_should_contain_any": [
+                  "넣",
+                  "투입",
+                  "긁"
+                ]
+              },
+              "matched_alternative": null,
+              "rationale": "이미 결제 안내 화면이므로 클릭보다 음성 안내가 우선이다."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

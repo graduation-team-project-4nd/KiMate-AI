@@ -1,0 +1,137 @@
+[
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "",
+      "available_texts": [
+        "세트메뉴 음료를 선택하세요",
+        "코카콜라- 미디엄",
+        "스프라이트- 미디엄",
+        "환타 - 미디엄",
+        "코카콜라 제로 - 미디엄",
+        "아이스 아메리카노 - 미디엄",
+        "아이스 카페 라떼 - 미디엄"
+      ],
+      "dialogue_history": [
+        {
+          "role": "user",
+          "utterance": "에그 불고기 버거 주문해 줘"
+        },
+        {
+          "role": "assistant",
+          "utterance": "오렌지 칠리 소스 버튼으로 안내하겠습니다.",
+          "action": {
+            "type": "click_text",
+            "params": {
+              "target_text": "오렌지 칠리 소스"
+            }
+          }
+        }
+      ],
+      "last_btn": "오렌지 칠리 소스"
+    },
+    "assistant": {
+      "status": "ambiguous",
+      "confidence": 0.9,
+      "response_message": "세트메뉴 음료를 선택하셔야 합니다. 코카콜라- 미디엄, 스프라이트- 미디엄, 환타 - 미디엄, 코카콜라 제로 - 미디엄, 아이스 아메리카노 - 미디엄, 아이스 카페 라떼 - 미디엄 중에서 어떤 음료를 선택하시겠습니까?",
+      "action": {
+        "type": "ask_clarification",
+        "params": {
+          "candidates": [
+            "코카콜라- 미디엄",
+            "스프라이트- 미디엄",
+            "환타 - 미디엄",
+            "코카콜라 제로 - 미디엄",
+            "아이스 아메리카노 - 미디엄",
+            "아이스 카페 라떼 - 미디엄"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "",
+      "available_texts": [
+        "홈",
+        "전체",
+        "치킨",
+        "씨푸드",
+        "불고기",
+        "추천 메뉴",
+        "버거",
+        "더블 빅맥",
+        "트리플 치즈 버거",
+        "빅맥",
+        "더블 불고기 버거"
+      ],
+      "dialogue_history": [
+        {
+          "role": "user",
+          "utterance": "에그 불고기 버거 주문해 줘"
+        },
+        {
+          "role": "assistant",
+          "utterance": "버거 버튼으로 안내하겠습니다.",
+          "action": {
+            "type": "click_text",
+            "params": {
+              "target_text": "버거"
+            }
+          }
+        }
+      ],
+      "last_btn": "버거"
+    },
+    "assistant": {
+      "status": "success",
+      "confidence": 0.88,
+      "response_message": "에그 불고기 버거가 아직 이 화면에 보이지 않습니다. 화면을 아래로 스크롤해 주세요. 손가락을 천천히 움직이시면서 다음 메뉴들이 나오는지 확인해 주세요.",
+      "action": {
+        "type": "speak_only",
+        "params": {}
+      }
+    }
+  },
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "없어",
+      "available_texts": [
+        "에그 불고기 버거 - 세트",
+        "에그 불고기 버거",
+        "맥너겟 4조각",
+        "오렌지 칠리 소스",
+        "코카-콜라 - 미디엄",
+        "수정",
+        "취소",
+        "장바구니 추가"
+      ],
+      "dialogue_history": [
+        {
+          "role": "assistant",
+          "utterance": "장바구니 추가 버튼으로 안내하겠습니다.",
+          "action": {
+            "type": "click_text",
+            "params": {
+              "target_text": "장바구니 추가"
+            }
+          }
+        }
+      ],
+      "last_btn": "장바구니 추가"
+    },
+    "assistant": {
+      "status": "success",
+      "confidence": 0.95,
+      "response_message": "변경할 내용이 없으시다면 장바구니 추가 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 장바구니 추가 버튼을 눌러주세요.",
+      "action": {
+        "type": "click_text",
+        "params": {
+          "target_text": "장바구니 추가"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "user": {
+      "task": "analyze_kiosk",
+      "user_input": "",
+      "available_texts": [
+        "홈",
+        "전체",
+        "치킨",
+        "씨푸드",
+        "불고기",
+        "추천 메뉴",
+        "버거",
+        "맥스파이시 상하이 버거",
+        "에그 불고기 버거",
+        "8000원, 897kcal",
+        "4400원, 630kcal",
+        "해피스낵",
+        "사이드",
+        "커피",
+        "맥치킨",
+        "맥치킨 모짜렐라",
+        "5200원, 621kcal",
+        "6600원, 789kcal",
+        "디저트",
+        "음료",
+        "해피빈",
+        "주문내역",
+        "5400원"
+      ],
+      "dialogue_history": [
+        {
+          "role": "assistant",
+          "utterance": "장바구니 추가 버튼으로 안내하겠습니다.",
+          "action": {
+            "type": "click_text",
+            "params": {
+              "target_text": "장바구니 추가"
+            }
+          }
+        }
+      ],
+      "last_btn": "장바구니 추가"
+    },
+    "assistant": {
+      "status": "success",
+      "confidence": 0.97,
+      "response_message": "주문을 확인하려면 주문내역 버튼으로 안내하겠습니다. 손가락을 천천히 움직이시다가 진동이 가장 강하게 느껴질 때 주문내역 버튼을 눌러주세요.",
+      "action": {
+        "type": "click_text",
+        "params": {
+          "target_text": "주문내역"
+        }
+      }
+    }
+  }
+]
